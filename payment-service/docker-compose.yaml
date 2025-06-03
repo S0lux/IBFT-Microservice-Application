@@ -1,0 +1,25 @@
+services:
+  mongo:
+    image: mongo:8.0.9
+    container_name: payment-service-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:8.0.0-alpine
+    container_name: payment-service-redis
+    ports:
+      - "6380:6379"
+    command: redis-server --requirepass redispassword
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:

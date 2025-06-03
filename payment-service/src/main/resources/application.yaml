@@ -1,0 +1,45 @@
+spring:
+
+  application:
+    name: payment-service
+
+  data:
+    redis:
+      connect-timeout: 5000
+      host: localhost
+      port: 6380
+      password: redispassword
+
+    mongodb:
+      uuid-representation: standard
+      uri: mongodb://root:example@localhost:27017/paymentdb?authSource=admin&maxConnecting=50
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.type.mapping: "com.sopuro.account_service.entities.ProcessedPaymentEntity:com.sopuro.payment_service.dtos.ProcessedPaymentMessageDTO"
+        spring.json.trusted.packages: '*'
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      transaction-id-prefix: account-service
+      properties:
+        auto:
+          create:
+            topics:
+              enable: true
+
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8083}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
