@@ -66,3 +66,7 @@ docker-compose up -d
 ##### 3. Start each microservice
 
 ##### 4. The gateway is exposed at port 8080
+
+## [Diagram] Payment Flow
+
+![Test](https://res.cloudinary.com/drzvajzd4/image/upload/v1749442751/readmes/pgjer04nfibune0k4nnx.png)
