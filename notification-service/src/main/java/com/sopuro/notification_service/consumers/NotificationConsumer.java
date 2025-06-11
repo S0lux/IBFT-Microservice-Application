@@ -21,16 +21,15 @@ public class NotificationConsumer {
     public void consumeIBFTNotification(
             @Payload NotificationPayloadMessage payload) {
 
-//        log.info("Received IBFT notification message from Kafka.");
-//        log.debug("Payload: {}", payload);
-//
-//        try {
-//            notificationOrchestrator.processNotification(payload);
-//            log.info("Successfully processed notification for transactionId: {}", payload.getTransactionId());
-//        } catch (Exception e) {
-//            // Log critical errors during orchestration. Individual sender errors are handled within the orchestrator.
-//            log.error("Critical error processing notification for transactionId: {}. Error: {}",
-//                    payload.getTransactionId(), e.getMessage(), e);
-//        }
+        log.info("Received IBFT notification message from Kafka.");
+        log.debug("Payload: {}", payload);
+
+        try {
+            notificationOrchestrator.processNotification(payload);
+            log.info("Successfully processed notification for transactionId: {}", payload.getTransactionId());
+        } catch (Exception e) {
+            log.error("Critical error processing notification for transactionId: {}. Error: {}",
+                    payload.getTransactionId(), e.getMessage(), e);
+        }
     }
 }

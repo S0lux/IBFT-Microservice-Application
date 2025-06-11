@@ -245,7 +245,7 @@ public class PaymentServiceImpl implements PaymentService {
         BigDecimal fee = calculateFee(request.getAmount());
 
         return PaymentEntity.builder()
-                //.id(UUID.randomUUID())
+                .id(UUID.randomUUID())
                 .senderId(senderAccount.getOwner().getId())
                 .senderAccountNumber(request.getSenderAccountNumber())
                 .recipientId(recipientAccount.getOwner().getId())
@@ -270,14 +270,13 @@ public class PaymentServiceImpl implements PaymentService {
 
     private BigDecimal calculateFee(BigDecimal amount) {
         // 1% fee with minimum and maximum bounds
-//        BigDecimal fee = amount.multiply(BigDecimal.valueOf(0.01));
-//        BigDecimal minFee = BigDecimal.valueOf(1000);
-//        BigDecimal maxFee = BigDecimal.valueOf(100_000);
-//
-//        if (fee.compareTo(minFee) < 0) return minFee;
-//        if (fee.compareTo(maxFee) > 0) return maxFee;
-//        return fee;
-        return BigDecimal.ZERO;
+        BigDecimal fee = amount.multiply(BigDecimal.valueOf(0.01));
+        BigDecimal minFee = BigDecimal.valueOf(1000);
+        BigDecimal maxFee = BigDecimal.valueOf(100_000);
+
+        if (fee.compareTo(minFee) < 0) return minFee;
+        if (fee.compareTo(maxFee) > 0) return maxFee;
+        return fee;
     }
 
     public void compensateFailedPayment(PaymentRequestDTO request) {

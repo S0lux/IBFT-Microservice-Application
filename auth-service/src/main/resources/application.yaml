@@ -2,9 +2,9 @@ spring:
   application:
     name: auth-service
   datasource:
-    url: jdbc:postgresql://localhost:5433/auth_service_db
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5433/${AUTH_POSTGRES_DB:auth_service_db}
+    username: ${AUTH_POSTGRES_USER:auth_service_root}
+    password: ${AUTH_POSTGRES_PASSWORD:auth_service_password}
   jpa:
     hibernate:
       ddl-auto: validate

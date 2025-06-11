@@ -2,12 +2,11 @@ services:
   mongo:
     image: mongo:8.0.9
     container_name: payment-service-mongo
-    restart: always
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-payment_service_root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-payment_service_root_password}
     volumes:
       - mongo_data:/data/db
 
@@ -16,7 +15,7 @@ services:
     container_name: payment-service-redis
     ports:
       - "6380:6379"
-    command: redis-server --requirepass redispassword
+    command: redis-server --requirepass ${REDIS_PASSWORD:-payment_service_redis_password}
     volumes:
       - redis_data:/data
 

@@ -5,13 +5,13 @@ spring:
     hibernate:
       ddl-auto: validate
   datasource:
-    url: jdbc:postgresql://localhost:5434/account_service_db
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5434/${ACCOUNT_POSTGRES_DB:account_service_db}
+    username: ${ACCOUNT_POSTGRES_USER:account_service_root}
+    password: ${ACCOUNT_POSTGRES_PASSWORD:account_service_password}
   data:
     redis:
       username: default
-      password: redispassword
+      password: ${ACCOUNT_REDIS_PASSWORD:account_service_redis_password}
       host: localhost
       port: 6379
       timeout: 5000

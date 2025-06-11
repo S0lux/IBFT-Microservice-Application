@@ -5,9 +5,9 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: account_service_db
+      POSTGRES_USER: ${ACCOUNT_POSTGRES_USER:-account_service_root}
+      POSTGRES_PASSWORD: ${ACCOUNT_POSTGRES_PASSWORD:-account_service_password}
+      POSTGRES_DB: ${ACCOUNT_POSTGRES_DB:-account_service_db}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -16,7 +16,7 @@ services:
     container_name: account-service-redis
     ports:
       - "6379:6379"
-    command: redis-server --requirepass redispassword
+    command: redis-server --requirepass ${ACCOUNT_REDIS_PASSWORD:-account_service_redis_password}
     volumes:
       - redis_data:/data
 

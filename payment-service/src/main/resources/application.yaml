@@ -8,11 +8,11 @@ spring:
       connect-timeout: 5000
       host: localhost
       port: 6380
-      password: redispassword
+      password: ${REDIS_PASSWORD:payment_service_redis_password}
 
     mongodb:
       uuid-representation: standard
-      uri: mongodb://root:example@localhost:27017/paymentdb?authSource=admin&maxConnecting=50
+      uri: mongodb://${MONGO_USERNAME:payment_service_root}:${MONGO_PASSWORD:payment_service_root_password}@localhost:27017/paymentdb?authSource=admin&maxConnecting=50
 
   kafka:
     bootstrap-servers: localhost:9092
